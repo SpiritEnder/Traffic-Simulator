@@ -1,0 +1,151 @@
+[gd_scene load_steps=6 format=3 uid="uid://dcjn7gx0ac7j6"]
+
+[ext_resource type="Texture2D" uid="uid://c66cmuppcng5k" path="res://texture/button_focus.png" id="1_0bafl"]
+
+[sub_resource type="GDScript" id="GDScript_70nvt"]
+script/source = "extends Control
+
+@onready var tree = $Tree
+@onready var addmenu = $AddMenu
+@onready var editmenu = $EditMenu
+var icon_obj = preload(\"res://texture/obj-icon-64.png\")
+var icon_arr = preload(\"res://texture/arr-icon.png\")
+var icon_kv = preload(\"res://texture/kv-icon.png\")
+
+var icon_add = preload(\"res://texture/add-icon.png\")
+var icon_edit = preload(\"res://texture/edit-icon-64.png\")
+var root:TreeItem
+var target:TreeItem
+
+enum itemtype {
+	OBJECT,
+	ARRAY,
+	KEY_VALUE,
+	
+}
+
+func _ready():
+	root = tree.create_item()
+	root.set_text(0,\"{Object}\")
+	root.set_icon(0,icon_obj)
+	root.add_button(0,icon_edit)
+	root.add_button(0,icon_add)
+	root.set_suffix(0,\"(3)\")
+	root.set_metadata(0,itemtype.KEY_VALUE)
+	#root.set_icon_region(0,Rect2(0,0,64,64))
+
+
+
+func _on_tree_item_activated():
+	target = tree.get_selected()
+	target.set_editable(0,true)
+
+
+func _on_tree_button_clicked(item:TreeItem, column, id, mouse_button_index):
+	target = item
+	match id:
+		0:
+			addmenu.popup(Rect2i(get_local_mouse_position(),Vector2i(addmenu.size)))
+		1:
+			editmenu.popup(Rect2i(get_local_mouse_position(),Vector2i(editmenu.size)))
+
+
+func _on_popup_menu_index_pressed(index):
+	match index:
+		0:
+			additem(itemtype.OBJECT)
+
+func additem(type:itemtype):
+	var child:TreeItem = target.create_child()
+	match type:
+		itemtype.OBJECT:
+			child.set_metadata(0,type)
+			child.set_text(0,\"{Object}\")
+			child.set_icon(0,icon_obj)
+			child.add_button(0,icon_edit)
+			child.add_button(0,icon_add)
+
+
+func _on_edit_menu_index_pressed(index):
+	target.set_metadata(0,index)
+	match index:
+		0:
+			target.set_text(0,\"{Object}\")
+			target.set_icon(0,icon_obj)
+		1:
+			target.set_text(0,\"{Array}\")
+			target.set_icon(0,icon_arr)
+		2:
+			target.set_text(0,\"{Item}\")
+			target.set_icon(0,icon_kv)
+"
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_edrad"]
+texture = ExtResource("1_0bafl")
+texture_margin_left = 8.0
+texture_margin_top = 8.0
+texture_margin_right = 8.0
+texture_margin_bottom = 8.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_eefa7"]
+texture = ExtResource("1_0bafl")
+texture_margin_left = 8.0
+texture_margin_top = 8.0
+texture_margin_right = 8.0
+texture_margin_bottom = 8.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_k32u4"]
+texture = ExtResource("1_0bafl")
+texture_margin_left = 8.0
+texture_margin_top = 8.0
+texture_margin_right = 8.0
+texture_margin_bottom = 8.0
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = SubResource("GDScript_70nvt")
+
+[node name="Tree" type="Tree" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/item_margin = 24
+theme_override_constants/icon_max_width = 32
+theme_override_constants/draw_relationship_lines = 1
+theme_override_constants/relationship_line_width = 4
+theme_override_styles/selected = SubResource("StyleBoxTexture_edrad")
+theme_override_styles/selected_focus = SubResource("StyleBoxTexture_eefa7")
+theme_override_styles/button_pressed = SubResource("StyleBoxTexture_k32u4")
+
+[node name="AddMenu" type="PopupMenu" parent="."]
+size = Vector2i(108, 100)
+item_count = 3
+item_0/text = "加入子项"
+item_0/id = 0
+item_1/text = "在之前插入"
+item_1/id = 1
+item_2/text = "在其后插入"
+item_2/id = 2
+
+[node name="EditMenu" type="PopupMenu" parent="."]
+size = Vector2i(108, 100)
+item_count = 3
+item_0/text = "设定为对象"
+item_0/id = 0
+item_1/text = "设定为数组"
+item_1/id = 1
+item_2/text = "设定为单项"
+item_2/id = 2
+
+[connection signal="button_clicked" from="Tree" to="." method="_on_tree_button_clicked"]
+[connection signal="item_activated" from="Tree" to="." method="_on_tree_item_activated"]
+[connection signal="index_pressed" from="AddMenu" to="." method="_on_popup_menu_index_pressed"]
+[connection signal="index_pressed" from="EditMenu" to="." method="_on_edit_menu_index_pressed"]
