@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://7g5t7v0b7u68"]
+
+[ext_resource type="Script" uid="uid://bi48fe6rnsu8s" path="res://classes/Car.gd" id="1_l8qdw"]
+
+[sub_resource type="Gradient" id="Gradient_4lqgh"]
+offsets = PackedFloat32Array(0, 0.12782, 0.860902, 1)
+colors = PackedColorArray(1, 1, 1, 1, 0.77, 0.503067, 0.3696, 1, 0.549354, 0.404425, 0.7825, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_nuccc"]
+gradient = SubResource("Gradient_4lqgh")
+width = 8
+height = 16
+fill_from = Vector2(0.551893, 0)
+fill_to = Vector2(0.576313, 1)
+
+[node name="Car" type="Sprite2D"]
+texture = SubResource("GradientTexture2D_nuccc")
+script = ExtResource("1_l8qdw")

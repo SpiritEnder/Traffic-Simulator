@@ -1,0 +1,63 @@
+[gd_scene load_steps=7 format=3 uid="uid://d031o51q13r6w"]
+
+[ext_resource type="Texture2D" uid="uid://dfl05v67twttv" path="res://texture/normal_road_texture.png" id="1_ddr13"]
+[ext_resource type="Script" uid="uid://bm4pue6xdakmv" path="res://classes/Road.gd" id="2_rbrj1"]
+[ext_resource type="Script" uid="uid://uwqj7u77oesy" path="res://classes/IOPoint.gd" id="3_ii4xa"]
+[ext_resource type="Texture2D" uid="uid://b1v3o6nfh5610" path="res://texture/reset.png" id="4_rbrj1"]
+
+[sub_resource type="Curve2D" id="Curve2D_okf0i"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, -40.6241, 94.7559, 0, 0, 0, 0, 175.393, 15.6211, 0, 0, 0, 0, -5.68271, -15.9211, 0, 0, 0, 0, 141.022, 147.671)
+}
+point_count = 4
+
+[sub_resource type="Curve2D" id="Curve2D_b0kse"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 146.978, 142.329, 0, 0, 0, 0, 15.6827, -4.07891, 0, 0, 0, 0, 144.607, 18.3789, 0, 0, 0, 0, -43.3759, 87.2441)
+}
+point_count = 4
+
+[node name="Road1" type="Line2D"]
+texture_filter = 1
+texture_repeat = 2
+points = PackedVector2Array(9, 61, 5, -10, 160, 17, 260, 173)
+width = 40.0
+texture = ExtResource("1_ddr13")
+texture_mode = 1
+joint_mode = 2
+script = ExtResource("2_rbrj1")
+seperation = 8.0
+
+[node name="Path2D" type="Path2D" parent="."]
+curve = SubResource("Curve2D_okf0i")
+
+[node name="Path2D2" type="Path2D" parent="."]
+curve = SubResource("Curve2D_b0kse")
+
+[node name="IOPointOut" type="Node2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(-24, 74)
+script = ExtResource("3_ii4xa")
+metadata/_custom_type_script = "uid://uwqj7u77oesy"
+
+[node name="Sprite2D" type="Sprite2D" parent="IOPointOut"]
+texture = ExtResource("4_rbrj1")
+
+[node name="IOPointIn" type="Node2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(257, 172)
+script = ExtResource("3_ii4xa")
+point_index = 1
+metadata/_custom_type_script = "uid://uwqj7u77oesy"
+
+[node name="Sprite2D" type="Sprite2D" parent="IOPointIn"]
+texture = ExtResource("4_rbrj1")
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(272, 53)
+enabled = false
+exclude_parent = false
+target_position = Vector2(100, 22)
+hit_from_inside = true
+collide_with_areas = true

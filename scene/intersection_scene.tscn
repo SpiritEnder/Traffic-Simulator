@@ -1,0 +1,34 @@
+[gd_scene load_steps=5 format=3 uid="uid://c0hr4dsekyjvh"]
+
+[ext_resource type="Texture2D" uid="uid://dfl05v67twttv" path="res://texture/normal_road_texture.png" id="1_blbr7"]
+[ext_resource type="Script" uid="uid://cwu6aixxcg3dd" path="res://classes/Intersection.gd" id="2_1yyck"]
+[ext_resource type="Script" uid="uid://uwqj7u77oesy" path="res://classes/IOPoint.gd" id="3_84kd8"]
+[ext_resource type="Texture2D" uid="uid://b1v3o6nfh5610" path="res://texture/reset.png" id="4_1yyck"]
+
+[node name="IntersectionRound1" type="Line2D"]
+texture_filter = 1
+texture_repeat = 2
+points = PackedVector2Array(122, 183, 13, 75, 117, -35, 223, 80)
+closed = true
+width = 40.0
+texture = ExtResource("1_blbr7")
+texture_mode = 1
+joint_mode = 2
+script = ExtResource("2_1yyck")
+
+[node name="IOPoint" type="Node2D" parent="."]
+position = Vector2(-7, -28)
+script = ExtResource("3_84kd8")
+metadata/_custom_type_script = "uid://uwqj7u77oesy"
+
+[node name="Sprite2D" type="Sprite2D" parent="IOPoint"]
+texture = ExtResource("4_1yyck")
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(272, 53)
+enabled = false
+exclude_parent = false
+target_position = Vector2(100, 22)
+hit_from_inside = true
+collide_with_areas = true

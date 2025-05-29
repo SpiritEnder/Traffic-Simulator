@@ -17,8 +17,14 @@ config/icon="uid://dcbydikc38kdg"
 
 [display]
 
+window/size/viewport_width=800
+window/size/viewport_height=500
 window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
+
+[physics]
+
+common/physics_ticks_per_second=40
 
 [rendering]
 

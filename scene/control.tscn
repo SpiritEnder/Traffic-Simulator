@@ -1,0 +1,424 @@
+[gd_scene load_steps=4 format=3 uid="uid://dnl2adl2mq7rx"]
+
+[ext_resource type="Script" uid="uid://csmd11mbmw7cb" path="res://scene/control.gd" id="1_vrdfc"]
+[ext_resource type="Texture2D" uid="uid://b1v3o6nfh5610" path="res://texture/reset.png" id="2_mnow5"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mnow5"]
+bg_color = Color(0, 0, 0, 0.254902)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+expand_margin_left = 4.0
+expand_margin_top = 4.0
+expand_margin_right = 4.0
+expand_margin_bottom = 4.0
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_vrdfc")
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 0
+offset_left = 11.0
+offset_top = 41.0
+offset_right = 89.0
+offset_bottom = 72.0
+text = "初始化"
+
+[node name="TickButton" type="Button" parent="."]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 11.0
+offset_top = 76.0
+offset_right = 89.0
+offset_bottom = 107.0
+text = "开始模拟"
+
+[node name="SeedLineEdit" type="LineEdit" parent="."]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 11.0
+offset_top = 7.0
+offset_right = 116.0
+offset_bottom = 38.0
+
+[node name="ZoomContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -225.0
+offset_top = -48.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ZoomContainer"]
+layout_mode = 2
+
+[node name="ZoomLabel" type="Label" parent="ZoomContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 10
+text = "zoom:1.0"
+
+[node name="ZoomResetButton" type="Button" parent="ZoomContainer/HBoxContainer"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+size_flags_horizontal = 8
+icon = ExtResource("2_mnow5")
+icon_alignment = 1
+
+[node name="ZoomUpButton" type="Button" parent="ZoomContainer/HBoxContainer"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+size_flags_horizontal = 8
+text = "+"
+icon_alignment = 1
+
+[node name="ZoomDownButton" type="Button" parent="ZoomContainer/HBoxContainer"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+size_flags_horizontal = 8
+text = "-"
+icon_alignment = 1
+
+[node name="ItemsContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -144.0
+offset_bottom = -108.0
+grow_horizontal = 0
+grow_vertical = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="ItemContainer" type="VBoxContainer" parent="ItemsContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="Button" type="Button" parent="ItemsContainer/ItemContainer"]
+visible = false
+layout_mode = 2
+text = "asd"
+
+[node name="ItemOperatorContainer" type="HBoxContainer" parent="."]
+unique_name_in_owner = true
+layout_mode = 2
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -802.0
+offset_top = 418.0
+offset_right = -8.0
+offset_bottom = -47.0
+alignment = 2
+
+[node name="LineSignLabel" type="Label" parent="ItemOperatorContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "当前选中线：null"
+horizontal_alignment = 2
+
+[node name="MoveLineButton" type="Button" parent="ItemOperatorContainer"]
+unique_name_in_owner = true
+visible = false
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+text = "⇱整体移动"
+
+[node name="AddLineButton" type="Button" parent="ItemOperatorContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+text = "+"
+
+[node name="DeleteLineButton" type="Button" parent="ItemOperatorContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+disabled = true
+text = "-"
+
+[node name="PointsContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_top = 118.0
+offset_right = 95.0
+offset_bottom = -89.0
+grow_vertical = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="PointContainer" type="VBoxContainer" parent="PointsContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="Button" type="Button" parent="PointsContainer/PointContainer"]
+visible = false
+layout_mode = 2
+text = "asd"
+
+[node name="LineOperatorContainer" type="HBoxContainer" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 112.0
+offset_top = 9.0
+offset_right = -150.0
+offset_bottom = 41.0
+grow_horizontal = 2
+
+[node name="Label" type="Label" parent="LineOperatorContainer"]
+layout_mode = 2
+text = "标签"
+
+[node name="SignEdit" type="LineEdit" parent="LineOperatorContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="OnewayLabel" type="Label" parent="LineOperatorContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "单行道"
+
+[node name="OneWayCheckBox" type="CheckBox" parent="LineOperatorContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="DestroyLabel" type="Label" parent="LineOperatorContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "标签"
+
+[node name="DestroyCheckBox" type="CheckBox" parent="LineOperatorContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="Label2" type="Label" parent="LineOperatorContainer"]
+layout_mode = 2
+text = "道路数量"
+
+[node name="PathEdit" type="SpinBox" parent="LineOperatorContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 0
+custom_arrow_step = 1.0
+
+[node name="UpdateButton" type="Button" parent="LineOperatorContainer"]
+layout_mode = 2
+text = "更新道路"
+
+[node name="TipsContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -47.0
+offset_right = -229.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="HBoxContainer" type="HBoxContainer" parent="TipsContainer"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="SaveButton" type="Button" parent="TipsContainer/HBoxContainer"]
+layout_mode = 2
+text = "保存"
+
+[node name="LoadButton" type="Button" parent="TipsContainer/HBoxContainer"]
+layout_mode = 2
+text = "读取"
+
+[node name="TipLabel" type="Label" parent="TipsContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/normal = SubResource("StyleBoxFlat_mnow5")
+text = "就绪。"
+
+[node name="StopButton" type="Button" parent="TipsContainer/HBoxContainer"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+text = "终止"
+
+[node name="PointOperatorContainer" type="MarginContainer" parent="."]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -87.0
+offset_right = -239.0
+offset_bottom = -39.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+metadata/_edit_group_ = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PointOperatorContainer"]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="AddPointButton" type="Button" parent="PointOperatorContainer/HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+text = "+"
+
+[node name="DeletePointButton" type="Button" parent="PointOperatorContainer/HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+disabled = true
+text = "-"
+
+[node name="UpPointButton" type="Button" parent="PointOperatorContainer/HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+disabled = true
+text = "↑"
+
+[node name="DownPointButton" type="Button" parent="PointOperatorContainer/HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+disabled = true
+text = "↓"
+
+[node name="MovePointButton" type="Button" parent="PointOperatorContainer/HBoxContainer"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+text = "⇱移动"
+
+[node name="XLineEdit" type="LineEdit" parent="PointOperatorContainer/HBoxContainer"]
+layout_mode = 2
+placeholder_text = "x"
+editable = false
+emoji_menu_enabled = false
+
+[node name="YLineEdit" type="LineEdit" parent="PointOperatorContainer/HBoxContainer"]
+layout_mode = 2
+placeholder_text = "y"
+editable = false
+emoji_menu_enabled = false
+
+[node name="IOPContainer" type="HBoxContainer" parent="."]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 8.0
+offset_top = -77.0
+offset_right = -236.0
+offset_bottom = -45.0
+metadata/_edit_group_ = true
+
+[node name="AddIOPointButton" type="Button" parent="IOPContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+text = "+"
+
+[node name="DeleteIOPointButton" type="Button" parent="IOPContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+text = "-"
+
+[node name="IOPIndexSpinBox" type="SpinBox" parent="IOPContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+max_value = 1.0
+custom_arrow_step = 1.0
+select_all_on_focus = true
+
+[node name="IOPScaleSpinBox" type="SpinBox" parent="IOPContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+max_value = 1.0
+step = 0.05
+select_all_on_focus = true
+
+[node name="IOPPairButton" type="Button" parent="IOPContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+text = "连接"
+
+[node name="IOPUnpairButton" type="Button" parent="IOPContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+disabled = true
+text = "断开"
+
+[node name="IOPLinkButton" type="Button" parent="IOPContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+disabled = true
+text = "⇶"
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="TickButton" to="." method="_on_tick_button_pressed"]
+[connection signal="pressed" from="ZoomContainer/HBoxContainer/ZoomResetButton" to="." method="_on_zoom_reset_button_pressed"]
+[connection signal="pressed" from="ZoomContainer/HBoxContainer/ZoomUpButton" to="." method="_on_zoom_up_button_pressed"]
+[connection signal="pressed" from="ZoomContainer/HBoxContainer/ZoomDownButton" to="." method="_on_zoom_down_button_pressed"]
+[connection signal="pressed" from="ItemOperatorContainer/MoveLineButton" to="." method="_on_move_line_button_pressed"]
+[connection signal="pressed" from="ItemOperatorContainer/AddLineButton" to="." method="_on_add_line_button_pressed"]
+[connection signal="pressed" from="ItemOperatorContainer/DeleteLineButton" to="." method="_on_delete_line_button_pressed"]
+[connection signal="text_changed" from="LineOperatorContainer/SignEdit" to="." method="_on_sign_text_changed"]
+[connection signal="toggled" from="LineOperatorContainer/OneWayCheckBox" to="." method="_on_one_way_check_box_toggled"]
+[connection signal="toggled" from="LineOperatorContainer/DestroyCheckBox" to="." method="_on_destroy_check_box_toggled"]
+[connection signal="value_changed" from="LineOperatorContainer/PathEdit" to="." method="_on_path_edit_value_changed"]
+[connection signal="pressed" from="LineOperatorContainer/UpdateButton" to="." method="_on_update_button_pressed"]
+[connection signal="pressed" from="TipsContainer/HBoxContainer/SaveButton" to="." method="_on_save_button_pressed"]
+[connection signal="pressed" from="TipsContainer/HBoxContainer/LoadButton" to="." method="_on_load_button_pressed"]
+[connection signal="pressed" from="TipsContainer/HBoxContainer/StopButton" to="." method="_on_stop_button_pressed"]
+[connection signal="pressed" from="PointOperatorContainer/HBoxContainer/AddPointButton" to="." method="_on_add_point_button_pressed"]
+[connection signal="pressed" from="PointOperatorContainer/HBoxContainer/DeletePointButton" to="." method="_on_delete_point_button_pressed"]
+[connection signal="pressed" from="PointOperatorContainer/HBoxContainer/UpPointButton" to="." method="_on_up_point_button_pressed"]
+[connection signal="pressed" from="PointOperatorContainer/HBoxContainer/DownPointButton" to="." method="_on_down_point_button_pressed"]
+[connection signal="pressed" from="PointOperatorContainer/HBoxContainer/MovePointButton" to="." method="_on_move_point_button_pressed"]
+[connection signal="pressed" from="IOPContainer/AddIOPointButton" to="." method="_on_add_io_point_button_pressed"]
+[connection signal="pressed" from="IOPContainer/DeleteIOPointButton" to="." method="_on_delete_io_point_button_pressed"]
+[connection signal="value_changed" from="IOPContainer/IOPIndexSpinBox" to="." method="_on_iop_index_spin_box_value_changed"]
+[connection signal="value_changed" from="IOPContainer/IOPScaleSpinBox" to="." method="_on_iop_scale_spin_box_value_changed"]
+[connection signal="pressed" from="IOPContainer/IOPPairButton" to="." method="_on_iop_pair_button_pressed"]
+[connection signal="pressed" from="IOPContainer/IOPUnpairButton" to="." method="_on_iop_unpair_button_pressed"]

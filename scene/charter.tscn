@@ -1,0 +1,68 @@
+[gd_scene load_steps=3 format=3 uid="uid://7nyhpb6w6sf1"]
+
+[ext_resource type="Script" uid="uid://begqv2coxx1i2" path="res://scene/charter.gd" id="1_ynt4q"]
+[ext_resource type="Script" uid="uid://bw5gjohtmfs6b" path="res://scene/charter_item.gd" id="2_f248i"]
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ynt4q")
+
+[node name="SplitContainer" type="SplitContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+split_offset = 155
+drag_area_margin_begin = 10
+drag_area_margin_end = 10
+drag_area_highlight_in_editor = true
+
+[node name="CharterItem" type="VBoxContainer" parent="SplitContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="Label" type="Label" parent="SplitContainer/CharterItem"]
+layout_mode = 2
+text = "title"
+horizontal_alignment = 2
+clip_text = true
+script = ExtResource("2_f248i")
+
+[node name="Label2" type="Label" parent="SplitContainer/CharterItem" node_paths=PackedStringArray("dependency")]
+layout_mode = 2
+horizontal_alignment = 2
+clip_text = true
+script = ExtResource("2_f248i")
+level = 1
+dependency = NodePath("../Label")
+
+[node name="CharterDrawer" type="VBoxContainer" parent="SplitContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="Panel" type="Label" parent="SplitContainer/CharterDrawer"]
+layout_mode = 2
+text = "30days"
+
+[node name="Panel" type="Panel" parent="SplitContainer/CharterDrawer/Panel"]
+layout_mode = 1
+
+[node name="VScrollBar" type="VScrollBar" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -19.0
+grow_horizontal = 0
+grow_vertical = 2
+
+[connection signal="scrolling" from="VScrollBar" to="." method="_on_v_scroll_bar_scrolling"]
