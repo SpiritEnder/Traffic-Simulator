@@ -20,7 +20,7 @@ point_count = 4
 [node name="Road1" type="Line2D"]
 texture_filter = 1
 texture_repeat = 2
-points = PackedVector2Array(9, 61, 5, -10, 160, 17, 260, 173)
+points = PackedVector2Array(0, 0, 50, 50)
 width = 40.0
 texture = ExtResource("1_ddr13")
 texture_mode = 1

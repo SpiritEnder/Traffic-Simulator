@@ -1,4 +1,4 @@
-@tool
+#@tool
 class_name Intersection extends Line2D
 
 # 是否为销毁点
@@ -19,7 +19,7 @@ var _target_point_index:int = -1
 
 
 # 更新显示
-@export_tool_button("更新") var update_action = update_path
+#@export_tool_button("更新") var update_action = update_path
 func update_path() -> void:
 	# 更新子节点列表
 	path_list.clear()

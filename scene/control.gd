@@ -414,9 +414,11 @@ func _on_delete_point_button_pressed() -> void:
 
 
 func _on_up_point_button_pressed() -> void:
-	var points = loc_current_line.points
-	loc_current_line.set_point_position(poc_current_point_index - 1,points[poc_current_point_index])
-	loc_current_line.set_point_position(poc_current_point_index,points[poc_current_point_index - 1])
+	if poc_current_point_index > 0:
+		var points = loc_current_line.points
+		loc_current_line.set_point_position(poc_current_point_index - 1,points[poc_current_point_index])
+		loc_current_line.set_point_position(poc_current_point_index,points[poc_current_point_index - 1])
+		poc_current_point_index -= 1
 	_on_updown_check()
 
 
@@ -424,6 +426,7 @@ func _on_down_point_button_pressed() -> void:
 	var points = loc_current_line.points
 	loc_current_line.set_point_position(poc_current_point_index + 1,points[poc_current_point_index])
 	loc_current_line.set_point_position(poc_current_point_index,points[poc_current_point_index + 1])
+	poc_current_point_index += 1
 	_on_updown_check()
 
 func _on_updown_check() -> void:
@@ -432,7 +435,7 @@ func _on_updown_check() -> void:
 	if poc_current_point_index > 0:
 		%UpPointButton.disabled = false
 	if poc_current_point_index < loc_current_line.points.size() - 1:
-		%UpPointButton.disabled = false
+		%DownPointButton.disabled = false
 	item_pressed(loc_current_line)
 
 func _on_delete_check() -> void:
@@ -527,3 +530,15 @@ func _on_destroy_check_box_toggled(toggled_on: bool) -> void:
 			loc_current_line.is_destruction = toggled_on
 		else:
 			tip("该选项只对路口生效")
+
+
+func _on_stat_button_pressed() -> void:
+	if %StatPanel.visible:
+		%StatPanel.visible = false
+	else:
+		var stat = graph.get_stat()
+		%StatTickCount.text = "物理周期数 " + str(stat["tick"])
+		%StatProvideCount.text = "车辆提供数 " + str(stat["provide"])
+		%StatArriveCount.text = "车辆抵达终点 " + str(stat["arrive"])
+		%StatDestructCount.text = "车辆被路口销毁 " + str(stat["destruct"])
+		%StatPanel.visible = true

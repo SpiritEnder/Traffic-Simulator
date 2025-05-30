@@ -1,6 +1,6 @@
 class_name Car extends Sprite2D
 
-
+signal stat(type:StringName)
 
 # 起始点
 var start_road:Road
@@ -43,7 +43,8 @@ func tick(delta:float = 0.05) -> void:
 			
 			# 如果已经到达路径终点
 			if end_road == belongs and end_point_index == target_point_index:
-				print("arrive")
+				#print("arrive")
+				stat.emit("arrive")
 				get_parent().get_parent().particle_send(position)
 				self.queue_free()
 				return
@@ -58,7 +59,7 @@ func tick(delta:float = 0.05) -> void:
 				belongs = iop.parent()
 				# 从寻路列表中得到目标出口
 				if way_purpose.size() == 0:
-					print("destroy")
+					stat.emit("arrive")
 					get_parent().get_parent().particle_send(position)
 					self.queue_free()
 					return
@@ -81,12 +82,13 @@ func tick(delta:float = 0.05) -> void:
 				belongs = iop.parent()
 				# 从寻路列表中得到目标出口
 				if way_purpose.size() == 0:
-					print("destroy")
+					#print("destroy")
+					stat.emit("arrive")
 					get_parent().get_parent().particle_send(position)
 					self.queue_free()
 					return
 				target_point_index = way_purpose.pop_front()
-				if belongs.is_roundabout:
+				if not belongs.is_roundabout:
 					current_point_index = target_point_index
 				else:
 					current_point_index = iop.point_index + 1
@@ -105,7 +107,8 @@ func tick(delta:float = 0.05) -> void:
 	elif belongs is Intersection:
 		# 路口是销毁点
 		if belongs.is_destruction:
-			print("inter destroy")
+			#print("inter destroy")
+			stat.emit("destructed")
 			get_parent().get_parent().particle_send(position)
 			self.queue_free()
 			return
@@ -122,7 +125,7 @@ func tick(delta:float = 0.05) -> void:
 				# 设定新目标点
 				# 从出口进来，则目标设为出口的前一个节点
 				#print("回")
-				if iop.point_index == 0:
+				if iop.pair.point_index == 0:
 					target_point_index = belongs.points.size() - 2
 					forward_direction = 1
 				else:

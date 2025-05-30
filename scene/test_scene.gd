@@ -54,10 +54,13 @@ func _graph_generator() -> void:
 	
 	for road in graph_roads:
 		road.update_path()
-	
+
+func get_stat():
+	return %Cars.get_stat()
 	
 
 func graph_init() -> void:
+	%Cars.init()
 	_graph_generator()
 
 var res_intersection := preload("res://scene/intersection_scene.tscn")
@@ -78,10 +81,13 @@ func tick_init(seed:int):
 	%CarProvider.init(seed)
 
 func tick(delta):
+	%Cars.tick()
 	var data:Array = %CarProvider.tick()
 	if data.size() > 0:
 		var car:Car = data[0]
 		%Cars.add_child(car)
+		%Cars.stat("provide")
+		car.stat.connect(%Cars.stat)
 		var result = %PathFinder.dijkstra(self,car)
 		print(result)
 		car.way_purpose = result

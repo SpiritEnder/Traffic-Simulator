@@ -1,4 +1,4 @@
-@tool
+#@tool
 class_name Road extends Line2D
 # =================================== 参数 ===================================
 ## 区域宽度（仅在路线多于两条时生效）
@@ -63,7 +63,7 @@ func get_another_pair(iop:IOPoint) -> IOPoint:
 
 
 
-@export_tool_button("更新") var update_action = update_path
+#@export_tool_button("更新") var update_action = update_path
 # 更新路线
 func update_path():
 	# 更新子节点列表
